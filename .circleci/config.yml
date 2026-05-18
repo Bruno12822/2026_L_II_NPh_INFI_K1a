@@ -7,6 +7,8 @@ jobs:
         
     steps:
       - checkout
+      # Instalacja narzędzia make na maszynie w chmurze:
+      - run: sudo apt-get update && sudo apt-get install -y make
       - run: make deps
       - run: make test       
 
