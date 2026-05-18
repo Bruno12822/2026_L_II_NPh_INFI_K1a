@@ -7,10 +7,19 @@ jobs:
         
     steps:
       - checkout
-      # Instalacja narzędzia make na maszynie w chmurze:
-      - run: sudo apt-get update && sudo apt-get install -y make
-      - run: make deps
-      - run: make test       
+      - run:
+          name: Instalacja make oraz przygotowanie srodowiska Python
+          command: |
+            sudo apt-get update && sudo apt-get install -y make
+            python3 -m venv .venv
+            source .venv/bin/activate
+            make deps
+
+      - run:
+          name: Uruchomienie testów jednostkowych
+          command: |
+            source .venv/bin/activate
+            make test
 
 workflows:
   basic:
